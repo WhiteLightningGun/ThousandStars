@@ -14,6 +14,14 @@ import MaxMagnitudeForFOV from "./Tools/max_magnitude_for_fov";
 let fovAdjustTime;
 let expectingDataUpdate = false;
 
+/**
+ * @typedef {Object} Props
+ * @property {Array} starData - is an array of objects with form ['StarID', 'ProperName', 'RA', 'Dec', 'Mag', 'Spectrum']
+ */
+
+/**
+ * @param {Props} props - Props for the Canvas component
+ */
 const Canvas = (props) => {
   const {
     width,
@@ -42,7 +50,7 @@ const Canvas = (props) => {
   let RadiusCoFactor = radiusCofactor; //scales the orthographic calculation results to fit neatly to the current screen proportions
   expectingDataUpdate = false; // back to false upon reinitialisation
   let fovHysteresis = 50; // units are ms
-  let bgColour = "#02071a"; // dark blue
+  let bgColour = "#020710"; // dark blue
 
   const draw = (ctx, frameCount) => {
     //console.log(`radiusCofactor: ${radiusCofactor}, locally: ${RadiusCoFactor} `)
@@ -240,7 +248,8 @@ const Canvas = (props) => {
           coords[1] + 0.5 * window.innerHeight,
           x,
           y
-        ) < 10
+        ) < 10 &&
+        MaxMagnitudeForFOV(Fov) > starData[i][4]
       ) {
         UpdateModalWithStarData(i);
         return;
@@ -268,16 +277,3 @@ const Canvas = (props) => {
 };
 
 export default Canvas;
-
-/*
-
-N.B. Objects returned from API stars_draw database have form:
-
-color : "#F3F8FA"
-decRad: -0.052839475014189084
-id: 107
-magnitude: 2.107819904933649
-name: ""
-raRad: 0.007958510275541049
-
-*/
