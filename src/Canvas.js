@@ -172,8 +172,6 @@ const Canvas = (props) => {
       fovAdjustTime = Date.now();
       expectingDataUpdate = true;
     }
-    console.log(`Fov: ${Fov} `);
-    console.log(`maxMagnitude: ${MaxMagnitudeForFOV(Fov)} `);
   };
 
   const DoubleClick = () => {

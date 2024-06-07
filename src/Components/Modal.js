@@ -34,7 +34,7 @@ function Modal({ active, handleModalClick, message, modalData }) {
         )}
       </div>
       <div className="modal-body">
-        <p>{message}</p>
+        <p>{/*message*/}</p>
       </div>
       <div className="modal-data">
         <table>
