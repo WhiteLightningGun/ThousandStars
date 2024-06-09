@@ -54,7 +54,6 @@ const Canvas = (props) => {
   let bgColour = "#020710"; // dark blue
 
   const draw = (ctx, frameCount) => {
-    //console.log(`radiusCofactor: ${radiusCofactor}, locally: ${RadiusCoFactor} `)
     if (expectingDataUpdate && Date.now() > fovAdjustTime + fovHysteresis) {
       GeneralUpdate(
         Fov,

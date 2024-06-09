@@ -16,6 +16,7 @@ import { GEMINI } from "./gemini";
 import { CAPRICORN } from "./capricorn";
 import { ARIES } from "./aries";
 import { PEGASUS } from "./pegasus";
+import { TAURUS } from "./taurus";
 
 //to do, make constellations a function that will return an array of constellations appropriate for the current FOV, Declination and Right Ascension
 
@@ -38,6 +39,7 @@ let AllConstellations = [
   CAPRICORN,
   ARIES,
   PEGASUS,
+  TAURUS,
 ];
 
 export default AllConstellations;
