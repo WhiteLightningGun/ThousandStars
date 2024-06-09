@@ -15,6 +15,7 @@ import { LYRA } from "./lyra";
 import { GEMINI } from "./gemini";
 import { CAPRICORN } from "./capricorn";
 import { ARIES } from "./aries";
+import { PEGASUS } from "./pegasus";
 
 //to do, make constellations a function that will return an array of constellations appropriate for the current FOV, Declination and Right Ascension
 
@@ -36,6 +37,7 @@ let AllConstellations = [
   GEMINI,
   CAPRICORN,
   ARIES,
+  PEGASUS,
 ];
 
 export default AllConstellations;

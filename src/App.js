@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Canvas from "./Canvas";
+import Controls from "./Components/Controls";
 import Modal from "./Components/Modal";
 import Abriged_StarData from "./Data/Abriged_StarData";
 import StarData from "./Data/StarData";
@@ -82,6 +83,9 @@ function App() {
     setCoFactor(radiuscofactor);
   };
 
+  //CONTROLS
+  const [constellationsVisible, setConstellationsVisible] = useState(true);
+
   //CANVAS DIMENSIONSs
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
@@ -152,6 +156,7 @@ function App() {
         activeStar={activeStar}
         lockedOut={lockedOut}
         setLockOut={setLockOut}
+        constellationsVisible={constellationsVisible}
       />
 
       <Modal
@@ -159,6 +164,11 @@ function App() {
         handleModalClick={handleModalClick}
         message={modalMessage}
         modalData={modalData}
+      />
+
+      <Controls
+        constellationsVisible={constellationsVisible}
+        setConstellationsVisible={setConstellationsVisible}
       />
     </>
   );

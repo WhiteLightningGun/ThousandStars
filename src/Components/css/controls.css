@@ -1,0 +1,26 @@
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 1vh;
+}
+
+.iconholder svg {
+  width: auto;
+  height: auto;
+  max-width: 50px;
+  margin: 0vw 1vw;
+}
+
+.iconholder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: auto;
+  background-color: rgba(112, 112, 112, 0.3);
+  border-radius: 5px;
+  padding: 0.6vw 0.1vw;
+  backdrop-filter: blur(3px); /* Add this line */
+}

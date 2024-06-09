@@ -38,6 +38,7 @@ const Canvas = (props) => {
     activeStar,
     lockedOut,
     setLockOut,
+    constellationsVisible,
     ...rest
   } = props;
 
@@ -77,7 +78,9 @@ const Canvas = (props) => {
 
     clearCanvas(canvasRef, bgColour);
     writeCurrentDecRa(canvasRef, Dec, Ra, 1, window.innerHeight - 25);
-    DrawConstellations(canvasRef, Fov, Dec, Ra, radius, RadiusCoFactor);
+    if (constellationsVisible) {
+      DrawConstellations(canvasRef, Fov, Dec, Ra, radius, RadiusCoFactor);
+    }
 
     // Indicator
     if (activeStar) {

@@ -13,25 +13,32 @@ function Modal({ active, handleModalClick, message, modalData }) {
   return (
     <div className={cssVisibilityControl}>
       <div className="modal-header">
-        <span className="close" onClick={handleModalClick}>
-          &times;
-        </span>
         {modalData.properName === "N/A" ? (
           <>
-            <h1>Hd: {modalData.hd}</h1>{" "}
+            <div className="modal-header-title">
+              <h1>Hd: {modalData.hd}</h1>{" "}
+              <span className="close" onClick={handleModalClick}>
+                &times;
+              </span>
+            </div>
             <h4>
               Hp: {modalData.hipparcos}, Gl: {modalData.gliese}
             </h4>
           </>
         ) : (
           <>
-            <h1>{modalData.properName}</h1>{" "}
+            <div className="modal-header-title">
+              <h1>{modalData.properName}</h1>{" "}
+              <span className="close" onClick={handleModalClick}>
+                &times;
+              </span>
+            </div>
             <h4>
               Hd: {modalData.hd}, Hp: {modalData.hipparcos}, Gl:{" "}
               {modalData.gliese}
             </h4>
           </>
-        )}
+        )}{" "}
       </div>
       <div className="modal-body">
         <p>{/*message*/}</p>
@@ -52,7 +59,7 @@ function Modal({ active, handleModalClick, message, modalData }) {
               <td>{Math.round(modalData.distanceLy * 100) / 100} LY</td>
             </tr>
             <tr>
-              <td className="modal-row-header">Constellation</td>
+              <td className="modal-row-header">Bayer Flamsteed</td>
               <td>{modalData.bayerFlamsteed}</td>
             </tr>
             <tr>

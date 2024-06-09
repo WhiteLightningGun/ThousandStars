@@ -1,0 +1,65 @@
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+    stroke: #ffffff;
+  }
+  from {
+    stroke-dashoffset: 13.53066349029541;
+    stroke: #7a7a7a;
+  }
+}
+
+@keyframes unDraw {
+  to {
+    stroke-dashoffset: 13.53066349029541;
+    stroke: #7a7a7a;
+  }
+  from {
+    stroke-dashoffset: 0;
+    stroke: #ffffff;
+  }
+}
+
+@keyframes circleColour {
+  from {
+    stroke-dashoffset: 0;
+    fill: #7a7a7a;
+  }
+  to {
+    stroke-dashoffset: 0;
+    fill: #ffffff;
+  }
+}
+
+@keyframes circleUncolour {
+  from {
+    stroke-dashoffset: 0;
+    fill: #ffffff;
+  }
+  to {
+    stroke-dashoffset: 0;
+    fill: #7a7a7a;
+  }
+}
+
+#crossbar {
+  stroke-dasharray: 13.53066349029541;
+  animation: draw 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+#unCrossbar {
+  stroke-dasharray: 13.53066349029541;
+  animation: unDraw 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+#circleDraw {
+  animation: circleColour 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+#circleUndraw {
+  animation: circleUncolour 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
