@@ -12,6 +12,7 @@ const ConstellationsIcon = ({ onClick, visible }) => {
       id="svg1"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>Toggle Constellations</title>
       <defs id="defs1"></defs>
       <g id="layer1" transform="translate(-80.076578,-141.97987)">
         <rect
