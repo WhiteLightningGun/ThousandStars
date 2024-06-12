@@ -9,7 +9,7 @@ function DrawConstellations(
   Ra,
   radius,
   RadiusCoFactor,
-  lineColour = "#343742"
+  lineColour = "#343742FF"
 ) {
   const canvas = ref.current;
   const ctx = canvas.getContext("2d");

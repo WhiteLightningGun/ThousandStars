@@ -10,6 +10,7 @@ import clearCanvas from "./Tools/clear_canvas";
 import DrawStars from "./Tools/draw_stars";
 import DrawIndicator from "./Tools/draw_indicator";
 import MaxMagnitudeForFOV from "./Tools/max_magnitude_for_fov";
+import Constellation_Opacity from "./Tools/constellation_opacity";
 
 let fovAdjustTime;
 let expectingDataUpdate = false;
@@ -39,6 +40,7 @@ const Canvas = (props) => {
     lockedOut,
     setLockOut,
     constellationsVisible,
+    constellationsToggleTime,
     ...rest
   } = props;
 
@@ -50,7 +52,7 @@ const Canvas = (props) => {
   let mouseDownPositionDecRa = [0, 0, 0, 0]; // stores (x,y) coordinates and Declination, Right Ascension at moment of mouse click
   let RadiusCoFactor = radiusCofactor; //scales the orthographic calculation results to fit neatly to the current screen proportions
   expectingDataUpdate = false; // back to false upon reinitialisation
-  let fovHysteresis = 50; // units are ms
+  let fovHysteresis = 50; // units are ms, prevents race conditions between mouse wheel and data update
   let bgColour = "#020710"; // dark blue
 
   const draw = (ctx, frameCount) => {
@@ -77,9 +79,19 @@ const Canvas = (props) => {
 
     clearCanvas(canvasRef, bgColour);
     writeCurrentDecRa(canvasRef, Dec, Ra, 1, window.innerHeight - 25);
-    if (constellationsVisible) {
-      DrawConstellations(canvasRef, Fov, Dec, Ra, radius, RadiusCoFactor);
-    }
+    DrawConstellations(
+      canvasRef,
+      Fov,
+      Dec,
+      Ra,
+      radius,
+      RadiusCoFactor,
+      Constellation_Opacity(
+        constellationsVisible,
+        constellationsToggleTime,
+        500
+      ) // make this a called to consellationOpacity function
+    );
 
     // Indicator
     if (activeStar) {

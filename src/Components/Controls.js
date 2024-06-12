@@ -2,13 +2,15 @@ import { React } from "react";
 import "./css/controls.css";
 import ConstellationsIcon from "./ControlIcons/ConstellationsIcon";
 
-const Controls = ({ constellationsVisible, setConstellationsVisible }) => {
-  // Your component logic goes here
-
-  // Function to toggle the animation
+const Controls = ({
+  constellationsVisible,
+  setConstellationsVisible,
+  setConstellationsToggleTime,
+}) => {
   const toggleSwitch = () => {
     console.log("toggle switch");
     setConstellationsVisible(!constellationsVisible);
+    setConstellationsToggleTime(Date.now());
   };
 
   return (

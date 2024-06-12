@@ -44,6 +44,7 @@ function App() {
 
   //CONTROL VARIABLES
   const [lockedOut, setLockOut] = useState(false);
+  const [constellationsToggleTime, setConstellationsToggleTime] = useState(0);
 
   const UpdateModalWithStarData = (starIndex) => {
     let dec_RAD = StarData[starIndex][8];
@@ -157,6 +158,7 @@ function App() {
         lockedOut={lockedOut}
         setLockOut={setLockOut}
         constellationsVisible={constellationsVisible}
+        constellationsToggleTime={constellationsToggleTime}
       />
 
       <Modal
@@ -169,6 +171,7 @@ function App() {
       <Controls
         constellationsVisible={constellationsVisible}
         setConstellationsVisible={setConstellationsVisible}
+        setConstellationsToggleTime={setConstellationsToggleTime}
       />
     </>
   );

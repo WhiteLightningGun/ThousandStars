@@ -1,6 +1,16 @@
 import angularDistanceCheck from "./angular_distance_check";
 import orthographicProjection from "./orthographic_projection";
 
+/**
+ * This draws a small circle around the star that was clicked on and highlighted
+ * @param {*} ref
+ * @param {*} activeStar
+ * @param {*} Fov
+ * @param {*} radius
+ * @param {*} RadiusCoFactor
+ * @param {*} Dec
+ * @param {*} Ra
+ */
 const drawIndicator = (
   ref,
   activeStar,
