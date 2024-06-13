@@ -9,6 +9,18 @@ import GetStarColour from "./Spectrum_Colour";
     ['StarID', 'ProperName', 'RA', 'Dec', 'Mag', 'Spectrum']
 */
 
+/**
+ * Draws the stars and their names if they have one
+ * @param {*} ref
+ * @param {*} data
+ * @param {*} radius
+ * @param {*} RadiusCoFactor
+ * @param {*} windowWidth
+ * @param {*} windowHeight
+ * @param {*} Fov
+ * @param {*} Dec
+ * @param {*} Ra
+ */
 function drawStars(
   ref,
   data,
@@ -18,7 +30,8 @@ function drawStars(
   windowHeight,
   Fov,
   Dec,
-  Ra
+  Ra,
+  textOpacity = "FF"
 ) {
   const canvas = ref.current;
   const ctx = canvas.getContext("2d");
@@ -41,11 +54,16 @@ function drawStars(
 
       if (data[i][1] !== "N/A") {
         // i.e. if the star has a name, it is drawn with larger radius
+        ctx.strokeStyle = GetStarColour(data[i][5]) + textOpacity;
+        ctx.fillStyle = GetStarColour(data[i][5]) + textOpacity;
+
         ctx.fillText(
           data[i][1],
           coords[0] + 0.5 * windowWidth + 8,
           coords[1] + 0.5 * windowHeight + 10
         );
+        ctx.strokeStyle = GetStarColour(data[i][5]);
+        ctx.fillStyle = GetStarColour(data[i][5]);
         ctx.beginPath();
         ctx.lineWidth = 2;
         ctx.arc(

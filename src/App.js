@@ -45,6 +45,9 @@ function App() {
   //CONTROL VARIABLES
   const [lockedOut, setLockOut] = useState(false);
   const [constellationsToggleTime, setConstellationsToggleTime] = useState(0);
+  const [constellationsVisible, setConstellationsVisible] = useState(true);
+  const [labelsVisible, setLabelsVisible] = useState(true);
+  const [labelsVisibleTime, setLabelsVisibleTime] = useState(0);
 
   const UpdateModalWithStarData = (starIndex) => {
     let dec_RAD = StarData[starIndex][8];
@@ -83,9 +86,6 @@ function App() {
     setDecRa({ DecCurrent: dec, RaCurrent: ra });
     setCoFactor(radiuscofactor);
   };
-
-  //CONTROLS
-  const [constellationsVisible, setConstellationsVisible] = useState(true);
 
   //CANVAS DIMENSIONSs
   const [dimensions, setDimensions] = useState({
@@ -159,6 +159,8 @@ function App() {
         setLockOut={setLockOut}
         constellationsVisible={constellationsVisible}
         constellationsToggleTime={constellationsToggleTime}
+        labelsVisible={labelsVisible}
+        labelsVisibleTime={labelsVisibleTime}
       />
 
       <Modal
@@ -172,6 +174,9 @@ function App() {
         constellationsVisible={constellationsVisible}
         setConstellationsVisible={setConstellationsVisible}
         setConstellationsToggleTime={setConstellationsToggleTime}
+        labelsVisible={labelsVisible}
+        setLabelsVisible={setLabelsVisible}
+        setLabelsVisibleTime={setLabelsVisibleTime}
       />
     </>
   );

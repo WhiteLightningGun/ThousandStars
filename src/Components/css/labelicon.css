@@ -1,0 +1,74 @@
+@keyframes labelLineDraw {
+  to {
+    stroke-dashoffset: 0;
+    stroke: #ffffff;
+  }
+  from {
+    stroke-dashoffset: 4.438739776611328;
+    stroke: #7a7a7a;
+  }
+}
+
+@keyframes labelLineUndraw {
+  to {
+    stroke-dashoffset: 4.438739776611328;
+    stroke: #7a7a7a;
+  }
+  from {
+    stroke-dashoffset: 0;
+    stroke: #ffffff;
+  }
+}
+
+@keyframes labelDraw {
+  to {
+    stroke: #ffffff;
+  }
+  from {
+    stroke: #7a7a7a;
+  }
+}
+
+@keyframes labelUndraw {
+  to {
+    stroke: #7a7a7a;
+  }
+  from {
+    stroke: #ffffff;
+  }
+}
+
+#upperline {
+  stroke-dasharray: 4.438739776611328;
+  animation: labelLineDraw 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+#unupperline {
+  stroke-dasharray: 4.438739776611328;
+  animation: labelLineUndraw 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+#lowerline {
+  stroke-dasharray: 4.438739776611328;
+  animation: labelLineDraw 0.3s ease-out;
+  animation-fill-mode: both;
+  animation-delay: 0.2s;
+}
+
+#unlowerline {
+  stroke-dasharray: 4.438739776611328;
+  animation: labelLineUndraw 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+#label_tag {
+  animation: labelDraw 0.3s ease-in;
+  animation-fill-mode: forwards;
+}
+
+#label_tag_hide {
+  animation: labelUndraw 0.3s ease-out;
+  animation-fill-mode: forwards;
+}

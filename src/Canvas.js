@@ -11,6 +11,7 @@ import DrawStars from "./Tools/draw_stars";
 import DrawIndicator from "./Tools/draw_indicator";
 import MaxMagnitudeForFOV from "./Tools/max_magnitude_for_fov";
 import Constellation_Opacity from "./Tools/constellation_opacity";
+import Text_Opacity from "./Tools/text_opacity";
 
 let fovAdjustTime;
 let expectingDataUpdate = false;
@@ -41,6 +42,8 @@ const Canvas = (props) => {
     setLockOut,
     constellationsVisible,
     constellationsToggleTime,
+    labelsVisibleTime,
+    labelsVisible,
     ...rest
   } = props;
 
@@ -114,7 +117,8 @@ const Canvas = (props) => {
       window.innerHeight,
       Fov,
       Dec,
-      Ra
+      Ra,
+      Text_Opacity(labelsVisible, labelsVisibleTime, 500)
     );
   };
 
