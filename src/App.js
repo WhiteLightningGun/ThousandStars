@@ -16,7 +16,7 @@ function debounce(fn, ms) {
   };
 }
 
-function App() {
+function App({ isMobile }) {
   //STAR DATA FOR INITIAL FOV AND DEC/RA ARGUMENTS
   const firstStar = [
     "23440",

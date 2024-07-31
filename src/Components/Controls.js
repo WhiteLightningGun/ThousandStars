@@ -17,7 +17,6 @@ const Controls = ({
   };
 
   const labelsToggleSwitch = () => {
-    console.log("labels toggle switch");
     setLabelsVisible(!labelsVisible);
     setLabelsVisibleTime(Date.now());
   };
