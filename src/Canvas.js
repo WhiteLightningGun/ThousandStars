@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import useCanvas from "./use_canvas";
 import "./Components/css/canvas.css";
 import orthographicProjection from "./Tools/orthographic_projection";
@@ -12,6 +12,7 @@ import DrawIndicator from "./Tools/draw_indicator";
 import MaxMagnitudeForFOV from "./Tools/max_magnitude_for_fov";
 import Constellation_Opacity from "./Tools/constellation_opacity";
 import Text_Opacity from "./Tools/text_opacity";
+import { MobileContext } from "./MobileContext";
 
 let fovAdjustTime;
 let expectingDataUpdate = false;
@@ -46,17 +47,18 @@ const Canvas = (props) => {
     labelsVisible,
     ...rest
   } = props;
-
+  const isMobile = useContext(MobileContext);
   let Fov = fov;
   let Ra = currentDecRa.RaCurrent;
   let Dec = currentDecRa.DecCurrent;
   let clickActive = false;
+  let clickRange = isMobile ? 20 : 10; // how close your click must be to a given star in order to register as a click on that star
   let currentMousePosition = [0, 0]; // stores (x,y) coordinates as [x,y]
   let mouseDownPositionDecRa = [0, 0, 0, 0]; // stores (x,y) coordinates and Declination, Right Ascension at moment of mouse click
   let pinchCoords = [0, 0, 0, 0];
   let RadiusCoFactor = radiusCofactor; //scales the orthographic calculation results to fit neatly to the current screen proportions
   expectingDataUpdate = false; // back to false upon reinitialisation
-  let fovHysteresis = 40; // units are ms, prevents race conditions between mouse wheel and data update
+  let fovHysteresis = 40; // units are ms, prevents race conditions between quick zoom changes and data update
   let bgColour = "#020710"; // dark blue
 
   const draw = (ctx, frameCount) => {
@@ -209,7 +211,7 @@ const Canvas = (props) => {
         Fov += 0.02 * deltaLength;
       }
 
-      RadiusCoFactor = newCoFactor(Fov); // this is not a react state change and does not trigger re-render
+      RadiusCoFactor = newCoFactor(Fov); // changing RadiusCoFactor is not a react state change and does not trigger re-render
       fovAdjustTime = Date.now();
       expectingDataUpdate = true;
       changeDecRa(Dec, Ra);
@@ -332,7 +334,7 @@ const Canvas = (props) => {
           coords[1] + 0.5 * window.innerHeight,
           x,
           y
-        ) < 10 &&
+        ) < clickRange &&
         MaxMagnitudeForFOV(Fov) > starData[i][4]
       ) {
         UpdateModalWithStarData(i);

@@ -13,6 +13,15 @@
     right: 0;
     transform: none;
   }
+  .iconholder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: auto;
+    background-color: rgb(56, 56, 56);
+    border-radius: 5px;
+    padding: 0.6vw 0.1vw;
+  }
 }
 
 .iconholder svg {

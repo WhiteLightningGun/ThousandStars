@@ -3,14 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import detectMobile from "./Tools/mobile_detect";
-
-const isMobile = detectMobile();
+import { MobileProvider } from "./MobileContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App isMobile={isMobile} />
+    <MobileProvider>
+      <App />
+    </MobileProvider>
   </React.StrictMode>
 );
 

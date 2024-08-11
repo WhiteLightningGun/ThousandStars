@@ -3,6 +3,13 @@ import "./css/modal.css";
 
 function Modal({ active, handleModalClick, message, modalData }) {
   let cssVisibilityControl = false;
+  const searchTerm =
+    modalData.properName === "N/A"
+      ? "HD " + modalData.hd
+      : modalData.properName;
+  const wikipediaSearchUrl = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(
+    searchTerm
+  )}&go=Go`;
 
   if (active === true) {
     cssVisibilityControl = "modal-content-show";
@@ -16,7 +23,7 @@ function Modal({ active, handleModalClick, message, modalData }) {
         {modalData.properName === "N/A" ? (
           <>
             <div className="modal-header-title">
-              <h1>Hd: {modalData.hd}</h1>{" "}
+              <h1>HD {modalData.hd}</h1>{" "}
               <span className="close" onClick={handleModalClick}>
                 &times;
               </span>
@@ -82,6 +89,17 @@ function Modal({ active, handleModalClick, message, modalData }) {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div className="modal-link">
+        <p>
+          <a
+            href={wikipediaSearchUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Search Wikipedia for {searchTerm}
+          </a>
+        </p>
       </div>
     </div>
   );
