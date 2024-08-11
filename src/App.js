@@ -27,7 +27,7 @@ function App({ isMobile }) {
     "A0m...",
   ];
   const [starData, setStarData] = useState(firstStar); // initial data to create canvas with firstStar before api has responded
-  const [activeStar, setActiveStar] = useState(false); // use this to store coords of active star with form [dec_RAD, ra_RAD]
+  const [activeStar, setActiveStar] = useState(false);
 
   //VIEWPORT SETTINGS
   const [currentDecRa, setDecRa] = useState({
@@ -162,14 +162,12 @@ function App({ isMobile }) {
         labelsVisible={labelsVisible}
         labelsVisibleTime={labelsVisibleTime}
       />
-
       <Modal
         active={modalActive}
         handleModalClick={handleModalClick}
         message={modalMessage}
         modalData={modalData}
       />
-
       <Controls
         constellationsVisible={constellationsVisible}
         setConstellationsVisible={setConstellationsVisible}

@@ -7,6 +7,14 @@
   padding: 1vh;
 }
 
+@media (max-width: 768px) {
+  .controls {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+}
+
 .iconholder svg {
   width: auto;
   height: auto;
@@ -22,5 +30,5 @@
   background-color: rgba(112, 112, 112, 0.3);
   border-radius: 5px;
   padding: 0.6vw 0.1vw;
-  backdrop-filter: blur(3px); /* Add this line */
+  backdrop-filter: blur(3px);
 }

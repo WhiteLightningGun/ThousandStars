@@ -3,14 +3,18 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
-  box-sizing: border-box; /* Add this line */
-  height: 100%; /* Add this line */
-  overflow: hidden; /* Add this line */
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow: hidden;
 }
 
 code {

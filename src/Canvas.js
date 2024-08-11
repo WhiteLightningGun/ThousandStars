@@ -53,9 +53,10 @@ const Canvas = (props) => {
   let clickActive = false;
   let currentMousePosition = [0, 0]; // stores (x,y) coordinates as [x,y]
   let mouseDownPositionDecRa = [0, 0, 0, 0]; // stores (x,y) coordinates and Declination, Right Ascension at moment of mouse click
+  let pinchCoords = [0, 0, 0, 0];
   let RadiusCoFactor = radiusCofactor; //scales the orthographic calculation results to fit neatly to the current screen proportions
   expectingDataUpdate = false; // back to false upon reinitialisation
-  let fovHysteresis = 50; // units are ms, prevents race conditions between mouse wheel and data update
+  let fovHysteresis = 40; // units are ms, prevents race conditions between mouse wheel and data update
   let bgColour = "#020710"; // dark blue
 
   const draw = (ctx, frameCount) => {
@@ -146,6 +147,73 @@ const Canvas = (props) => {
 
     mouseDownPositionDecRa = [x, y, Dec, Ra];
     clickActive = true;
+  };
+
+  const handleTouchStart = (event) => {
+    const touches = event.touches;
+    const rect = canvasRef.current.getBoundingClientRect();
+    if (touches.length === 1) {
+      const touch = touches[0];
+
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+
+      currentMousePosition = [x, y];
+      mouseDownPositionDecRa = [x, y, Dec, Ra];
+      //set current mouse position with touch event data
+      clickActive = true;
+    } else if (touches.length === 2) {
+      const touch1 = touches[0];
+      const touch2 = touches[1];
+      const x1 = touch1.clientX - rect.left;
+      const y1 = touch1.clientY - rect.top;
+      const x2 = touch2.clientX - rect.left;
+      const y2 = touch2.clientY - rect.top;
+
+      pinchCoords = [x1, y1, x2, y2];
+    }
+  };
+
+  const handleTouchEnd = (event) => {
+    if (lockedOut) {
+      return;
+    }
+
+    clickActive = false;
+    changeDecRa(Dec, Ra);
+  };
+
+  const handleTouchMove = (event) => {
+    // Get the touch points
+    if (expectingDataUpdate && Date.now() > fovAdjustTime + fovHysteresis) {
+      return;
+    }
+    const touches = event.touches;
+    const rect = canvasRef.current.getBoundingClientRect();
+    if (touches.length === 1) {
+      const touch = touches[0];
+      let [x, y] = [touch.clientX - rect.left, touch.clientY - rect.top];
+      currentMousePosition = [x, y];
+    } else if (touches.length === 2) {
+      let [touch1, touch2] = touches;
+      let [x1, y1] = [touch1.clientX - rect.left, touch1.clientY - rect.top];
+      let [x2, y2] = [touch2.clientX - rect.left, touch2.clientY - rect.top];
+      let currentLength = distanceMagnitude(x1, y1, x2, y2);
+      let deltaLength = -currentLength + distanceMagnitude(...pinchCoords);
+
+      if (Fov < 40) {
+        Fov = 40;
+      } else if (Fov > 180) {
+        Fov = 180;
+      } else {
+        Fov += 0.02 * deltaLength;
+      }
+
+      RadiusCoFactor = newCoFactor(Fov); // this is not a react state change and does not trigger re-render
+      fovAdjustTime = Date.now();
+      expectingDataUpdate = true;
+      changeDecRa(Dec, Ra);
+    }
   };
 
   const mouseUpped = (e) => {
@@ -285,6 +353,9 @@ const Canvas = (props) => {
         onMouseDown={mousedowned}
         onMouseUp={mouseUpped}
         onMouseMove={currentMousePos}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onWheel={mouseWheeled}
         onDoubleClick={DoubleClick}
       />
