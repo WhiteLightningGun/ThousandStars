@@ -10,13 +10,19 @@
  */
 
 function angularDistanceCheck(Fov, phi1, L1, phi2, L2) {
-  let FovRad = Fov * 0.00872664625; // 0.00872664625 is pi/360, this converts a FOV argument in degrees to radians without using a division operator
+  const FovRad = Fov * 0.00872664625; // 0.00872664625 is pi/360, this converts a FOV argument in degrees to radians without using a division operator
 
-  let angularDistance = Math.acos(
-    Math.cos(phi1) * Math.cos(phi2) * Math.cos(L1 - L2) +
-      Math.sin(phi1) * Math.sin(phi2)
+  const cosPhi1 = Math.cos(phi1);
+  const cosPhi2 = Math.cos(phi2);
+  const sinPhi1 = Math.sin(phi1);
+  const sinPhi2 = Math.sin(phi2);
+  const cosL1L2 = Math.cos(L1 - L2);
+
+  const angularDistance = Math.acos(
+    cosPhi1 * cosPhi2 * cosL1L2 + sinPhi1 * sinPhi2
   );
 
   return angularDistance < FovRad;
 }
+
 export default angularDistanceCheck;

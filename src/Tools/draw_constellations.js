@@ -16,10 +16,11 @@ function DrawConstellations(
 
   ctx.lineWidth = 2;
 
-  let localFov = 1.2 * Fov;
-  if (localFov > 180) {
-    localFov = 180;
-  }
+  let localFov = Math.min(1.2 * Fov, 180);
+
+  const halfWindowWidth = 0.5 * window.innerWidth;
+  const halfWindowHeight = 0.5 * window.innerHeight;
+  const adjustedRadius = radius * RadiusCoFactor;
 
   let allConstellationsLength = AllConstellations.length;
 
@@ -30,7 +31,7 @@ function DrawConstellations(
       let subConstellationLength = AllConstellations[i][j].length;
 
       for (let k = 0; k < subConstellationLength - 1; k++) {
-        //Decide whether or not to calculate and draw line depending on if it is within current Fov
+        // Decide whether or not to calculate and draw line depending on if it is within current Fov
         if (
           angularDistanceCheck(
             localFov,
@@ -41,14 +42,14 @@ function DrawConstellations(
           )
         ) {
           let coord1 = orthographicProjection(
-            radius * RadiusCoFactor,
+            adjustedRadius,
             Dec,
             Ra,
             AllConstellations[i][j][k][0],
             AllConstellations[i][j][k][1]
           );
           let coord2 = orthographicProjection(
-            radius * RadiusCoFactor,
+            adjustedRadius,
             Dec,
             Ra,
             AllConstellations[i][j][k + 1][0],
@@ -56,14 +57,8 @@ function DrawConstellations(
           );
 
           ctx.beginPath();
-          ctx.moveTo(
-            coord1[0] + 0.5 * window.innerWidth,
-            coord1[1] + 0.5 * window.innerHeight
-          );
-          ctx.lineTo(
-            coord2[0] + 0.5 * window.innerWidth,
-            coord2[1] + 0.5 * window.innerHeight
-          );
+          ctx.moveTo(coord1[0] + halfWindowWidth, coord1[1] + halfWindowHeight);
+          ctx.lineTo(coord2[0] + halfWindowWidth, coord2[1] + halfWindowHeight);
 
           ctx.strokeStyle = lineColour;
           ctx.stroke();

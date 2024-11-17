@@ -5,11 +5,14 @@ function writeCurrentDecRa(ref, Dec, Ra, xPos, yPos) {
   const canvas = ref.current;
   const context = canvas.getContext("2d");
 
+  const DEG_CONVERSION = 57.29577951;
+  const HOUR_CONVERSION = 3.819718634;
+
   context.strokeStyle = "white";
   context.fillStyle = "white";
   context.fillText(
-    `Dec: ${(Dec * 57.29577951).toFixed(2)} deg, Ra: ${(
-      Ra * 3.819718634
+    `Dec: ${(Dec * DEG_CONVERSION).toFixed(2)} deg, Ra: ${(
+      Ra * HOUR_CONVERSION
     ).toFixed(2)} hours`,
     xPos,
     yPos

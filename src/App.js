@@ -26,7 +26,7 @@ function App() {
     -1.44,
     "A0m...",
   ];
-  const [starData, setStarData] = useState(firstStar); // initial data to create canvas with firstStar before api has responded
+  const [abrigedStarData, setAbrigedStarData] = useState(firstStar); // initial data to create canvas with firstStar before api has responded
   const [activeStar, setActiveStar] = useState(false);
 
   //VIEWPORT SETTINGS
@@ -99,7 +99,7 @@ function App() {
   });
 
   useEffect(() => {
-    setStarData(Abriged_StarData);
+    setAbrigedStarData(Abriged_StarData);
     setLockOut(false);
     setMessage(`done`);
 
@@ -145,7 +145,7 @@ function App() {
       <Canvas
         width={dimensions.width}
         height={dimensions.height}
-        starData={starData}
+        abrigedStarData={abrigedStarData}
         currentDecRa={currentDecRa}
         changeDecRa={changeDecRa}
         radiusCofactor={radiusCofactor}

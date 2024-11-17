@@ -21,6 +21,22 @@ import GetStarColour from "./Spectrum_Colour";
  * @param {*} Dec
  * @param {*} Ra
  */
+function drawStar(ctx, coords, windowWidth, windowHeight, magnitude, color) {
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.lineWidth = 2;
+  ctx.arc(
+    coords[0] + 0.5 * windowWidth,
+    coords[1] + 0.5 * windowHeight,
+    5 - magnitude,
+    0,
+    2 * Math.PI
+  );
+  ctx.stroke();
+  ctx.fill();
+}
+
 function drawStars(
   ref,
   data,
@@ -37,11 +53,11 @@ function drawStars(
   const ctx = canvas.getContext("2d");
   let maxMagnitude = MaxMagnitudeForFOV(Fov);
   let dataLength = Object.keys(data).length;
+  const halfWindowWidth = 0.5 * windowWidth;
+  const halfWindowHeight = 0.5 * windowHeight;
 
   for (let i = 0; i < dataLength; i++) {
-    //select colour for this star
-    ctx.strokeStyle = GetStarColour(data[i][5]);
-    ctx.fillStyle = GetStarColour(data[i][5]);
+    const starColor = GetStarColour(data[i][5]);
 
     if (angularDistanceCheck(Fov, Dec, Ra, data[i][3], data[i][2])) {
       let coords = orthographicProjection(
@@ -54,40 +70,17 @@ function drawStars(
 
       if (data[i][1] !== "N/A") {
         // i.e. if the star has a name, it is drawn with larger radius
-        ctx.strokeStyle = GetStarColour(data[i][5]) + textOpacity;
-        ctx.fillStyle = GetStarColour(data[i][5]) + textOpacity;
-
+        const starColorWithOpacity = starColor + textOpacity;
+        ctx.fillStyle = starColorWithOpacity;
         ctx.fillText(
           data[i][1],
-          coords[0] + 0.5 * windowWidth + 8,
-          coords[1] + 0.5 * windowHeight + 10
+          coords[0] + halfWindowWidth + 8,
+          coords[1] + halfWindowHeight + 10
         );
-        ctx.strokeStyle = GetStarColour(data[i][5]);
-        ctx.fillStyle = GetStarColour(data[i][5]);
-        ctx.beginPath();
-        ctx.lineWidth = 2;
-        ctx.arc(
-          coords[0] + 0.5 * windowWidth,
-          coords[1] + 0.5 * windowHeight,
-          5 - data[i][4],
-          0,
-          2 * Math.PI
-        );
-        ctx.stroke();
-        ctx.fill();
+        drawStar(ctx, coords, windowWidth, windowHeight, data[i][4], starColor);
       } else if (maxMagnitude > data[i][4]) {
         //do nothing if star is not bright and has Mag < maxMagnitude
-        ctx.beginPath();
-        ctx.lineWidth = 2;
-        ctx.arc(
-          coords[0] + 0.5 * windowWidth,
-          coords[1] + 0.5 * windowHeight,
-          5 - data[i][4],
-          0,
-          2 * Math.PI
-        );
-        ctx.stroke();
-        ctx.fill();
+        drawStar(ctx, coords, windowWidth, windowHeight, data[i][4], starColor);
       }
     }
   }

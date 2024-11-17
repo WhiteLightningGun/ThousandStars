@@ -19,7 +19,7 @@ let expectingDataUpdate = false;
 
 /**
  * @typedef {Object} Props
- * @property {Array} starData - is an array of objects with form ['StarID', 'ProperName', 'RA', 'Dec', 'Mag', 'Spectrum']
+ * @property {Array} abrigedStarData - is an array of objects with form ['StarID', 'ProperName', 'RA', 'Dec', 'Mag', 'Spectrum']
  */
 
 /**
@@ -29,7 +29,7 @@ const Canvas = (props) => {
   const {
     width,
     height,
-    starData,
+    abrigedStarData,
     currentDecRa,
     changeDecRa,
     radiusCofactor,
@@ -113,7 +113,7 @@ const Canvas = (props) => {
     }
     DrawStars(
       canvasRef,
-      starData,
+      abrigedStarData,
       radius,
       RadiusCoFactor,
       window.innerWidth,
@@ -313,7 +313,7 @@ const Canvas = (props) => {
       return;
     }
 
-    let objectLength = Object.keys(starData).length;
+    let objectLength = Object.keys(abrigedStarData).length;
     let radius =
       window.innerWidth >= window.innerHeight
         ? window.innerWidth
@@ -324,8 +324,8 @@ const Canvas = (props) => {
         radius * RadiusCoFactor,
         Dec,
         Ra,
-        starData[i][3], // starData obeys scheme: [['StarID', 'ProperName', 'RA', 'Dec', 'Mag', 'Spectrum']]
-        starData[i][2]
+        abrigedStarData[i][3], // starData obeys scheme: [['StarID', 'ProperName', 'RA', 'Dec', 'Mag', 'Spectrum']]
+        abrigedStarData[i][2]
       );
 
       if (
@@ -335,7 +335,7 @@ const Canvas = (props) => {
           x,
           y
         ) < clickRange &&
-        MaxMagnitudeForFOV(Fov) > starData[i][4]
+        MaxMagnitudeForFOV(Fov) > abrigedStarData[i][4]
       ) {
         UpdateModalWithStarData(i);
         return;
