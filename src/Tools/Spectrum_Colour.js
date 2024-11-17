@@ -18,7 +18,7 @@ function GetStarColour(code = "A") {
     W: "#c0f0a8",
     N: "#c0f0a8",
   };
-  return COLOUR[code[0].toUpperCase()] || "#FFFFFF"; // Default color is white
+  return COLOUR[code[0]] || "#FFFFFF"; // Default color is white
 }
 
 export default GetStarColour;

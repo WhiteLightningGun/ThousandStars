@@ -2,7 +2,6 @@
 
 function RAToRadians(Ra) {
   let result = parseFloat(Ra) * 0.2617993878;
-
   return result;
 }
 export default RAToRadians;
