@@ -106,17 +106,34 @@ function App() {
     const debouncedHandleResize = debounce(function handleResize() {
       setDimensions({ height: window.innerHeight, width: window.innerWidth });
       setCurrentCentre({
-        centreX: dimensions.width * 0.5,
-        centreY: dimensions.height * 0.5,
+        centreX: window.innerWidth * 0.5,
+        centreY: window.innerHeight * 0.5,
       });
       setMessage(`fov: ${fov} `);
     }, 200);
 
     window.addEventListener("resize", debouncedHandleResize);
 
-    //CLEAN UP FUNCTION
-    return (_) => {
+    const preventZoom = (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+      }
+    };
+
+    const preventWheelZoom = (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("keydown", preventZoom);
+    window.addEventListener("wheel", preventWheelZoom, { passive: false });
+
+    // CLEAN UP FUNCTION
+    return () => {
       window.removeEventListener("resize", debouncedHandleResize);
+      window.removeEventListener("keydown", preventZoom);
+      window.removeEventListener("wheel", preventWheelZoom);
     };
   }, [
     centreCoords,

@@ -12,7 +12,7 @@ import GetStarColour from "./Spectrum_Colour";
 /**
  * Draws the stars and their names if they have one
  * @param {*} ref
- * @param {*} data
+ * @param {*} data ['StarID', 'ProperName', 'RA', 'Dec', 'Mag', 'Spectrum']
  * @param {*} radius
  * @param {*} RadiusCoFactor
  * @param {*} windowWidth
@@ -21,21 +21,6 @@ import GetStarColour from "./Spectrum_Colour";
  * @param {*} Dec
  * @param {*} Ra
  */
-function drawStar(ctx, coords, windowWidth, windowHeight, magnitude, color) {
-  ctx.strokeStyle = color;
-  ctx.fillStyle = color;
-  ctx.beginPath();
-  ctx.lineWidth = 2;
-  ctx.arc(
-    coords[0] + 0.5 * windowWidth,
-    coords[1] + 0.5 * windowHeight,
-    5 - magnitude,
-    0,
-    2 * Math.PI
-  );
-  ctx.stroke();
-  ctx.fill();
-}
 
 function drawStars(
   ref,
@@ -52,7 +37,7 @@ function drawStars(
   const canvas = ref.current;
   const ctx = canvas.getContext("2d");
   let maxMagnitude = MaxMagnitudeForFOV(Fov);
-  let dataLength = Object.keys(data).length;
+  let dataLength = data.length;
   const halfWindowWidth = 0.5 * windowWidth;
   const halfWindowHeight = 0.5 * windowHeight;
 
@@ -86,4 +71,21 @@ function drawStars(
   }
 }
 
+function drawStar(ctx, coords, windowWidth, windowHeight, magnitude, color) {
+  let mag = 5 - magnitude < 0.2 ? 0.2 : 5 - magnitude;
+
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.lineWidth = 2;
+  ctx.arc(
+    coords[0] + 0.5 * windowWidth,
+    coords[1] + 0.5 * windowHeight,
+    mag,
+    0,
+    2 * Math.PI
+  );
+  ctx.stroke();
+  ctx.fill();
+}
 export default drawStars;

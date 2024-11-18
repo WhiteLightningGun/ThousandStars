@@ -13,6 +13,7 @@ import MaxMagnitudeForFOV from "./Tools/max_magnitude_for_fov";
 import Constellation_Opacity from "./Tools/constellation_opacity";
 import Text_Opacity from "./Tools/text_opacity";
 import { MobileContext } from "./MobileContext";
+import { findNearestNeighborsFOV } from "./Data/Abriged_TreeData";
 
 let fovAdjustTime;
 let expectingDataUpdate = false;
@@ -49,6 +50,8 @@ const Canvas = (props) => {
   } = props;
   const isMobile = useContext(MobileContext);
   let Fov = fov;
+  const fovMAX = 180;
+  const fovMIN = 20;
   let Ra = currentDecRa.RaCurrent;
   let Dec = currentDecRa.DecCurrent;
   let clickActive = false;
@@ -60,6 +63,18 @@ const Canvas = (props) => {
   expectingDataUpdate = false; // back to false upon reinitialisation
   let fovHysteresis = 40; // units are ms, prevents race conditions between quick zoom changes and data update
   let bgColour = "#020710"; // dark blue
+  const MAXSTARS = 200; // ensures no more than MAXSTARS stars will be iterated through and drawn
+  let theData = findNearestNeighborsFOV(
+    Ra,
+    Dec,
+    MAXSTARS,
+    MaxMagnitudeForFOV(Fov)
+  );
+
+  const updateData = (ra, dec, Fov) => {
+    let maxMag = MaxMagnitudeForFOV(Fov);
+    theData = findNearestNeighborsFOV(ra, dec, MAXSTARS, maxMag);
+  };
 
   const draw = (ctx, frameCount) => {
     if (expectingDataUpdate && Date.now() > fovAdjustTime + fovHysteresis) {
@@ -73,6 +88,8 @@ const Canvas = (props) => {
       );
       setLockOut(true);
     }
+
+    updateData(Ra, Dec, Fov);
 
     if (clickActive && !expectingDataUpdate && !lockedOut) {
       AdjustDecRa();
@@ -113,7 +130,7 @@ const Canvas = (props) => {
     }
     DrawStars(
       canvasRef,
-      abrigedStarData,
+      theData,
       radius,
       RadiusCoFactor,
       window.innerWidth,
@@ -203,10 +220,10 @@ const Canvas = (props) => {
       let currentLength = distanceMagnitude(x1, y1, x2, y2);
       let deltaLength = -currentLength + distanceMagnitude(...pinchCoords);
 
-      if (Fov < 40) {
-        Fov = 40;
-      } else if (Fov > 180) {
-        Fov = 180;
+      if (Fov < fovMIN) {
+        Fov = fovMIN;
+      } else if (Fov > fovMAX) {
+        Fov = fovMAX;
       } else {
         Fov += 0.02 * deltaLength;
       }
@@ -246,15 +263,15 @@ const Canvas = (props) => {
     if (expectingDataUpdate && Date.now() > fovAdjustTime + fovHysteresis) {
       return;
     }
-    if (e.deltaY > 0 && Fov > 40) {
+    if (e.deltaY > 0 && Fov > fovMIN) {
       // Min Fov is now 40 degrees
       Fov = Fov - 10;
       RadiusCoFactor = newCoFactor(Fov); // this is not a react state change and does not trigger re-render
       fovAdjustTime = Date.now();
       expectingDataUpdate = true;
-    } else if (e.delta > 0 && Fov === 40) {
+    } else if (e.delta > 0 && Fov === fovMIN) {
       return;
-    } else if (e.deltaY < 0 && Fov < 180) {
+    } else if (e.deltaY < 0 && Fov < fovMAX) {
       Fov = Fov + 10;
       RadiusCoFactor = newCoFactor(Fov); // this is not a react state change and does not trigger re-render
       fovAdjustTime = Date.now();
@@ -313,7 +330,7 @@ const Canvas = (props) => {
       return;
     }
 
-    let objectLength = Object.keys(abrigedStarData).length;
+    let objectLength = abrigedStarData.length;
     let radius =
       window.innerWidth >= window.innerHeight
         ? window.innerWidth

@@ -5,7 +5,7 @@
 function MaxMagnitudeForFOV(fov) {
   let maxMagnitude;
   //maxMagnitude = 0.0333333333333 * fov - 2;
-  maxMagnitude = -0.0142857142857 * fov + 5.57142857143; // this setting draws stars up to magnitude 3 at fov = 180 and magnitude 5 at fov = 40
+  maxMagnitude = -0.025 * fov + 7.5; // this setting draws stars up to magnitude 3 at fov = 180 and magnitude 7 at fov = 20
   //maxMagnitude = -1;
   return maxMagnitude;
 }
