@@ -61,7 +61,7 @@ const Canvas = (props) => {
   let pinchCoords = [0, 0, 0, 0];
   let RadiusCoFactor = radiusCofactor; //scales the orthographic calculation results to fit neatly to the current screen proportions
   expectingDataUpdate = false; // back to false upon reinitialisation
-  let fovHysteresis = 40; // units are ms, prevents race conditions between quick zoom changes and data update
+  let fovHysteresis = 60; // units are ms, prevents race conditions between quick zoom changes and data update
   let bgColour = "#020710"; // dark blue
   const MAXSTARS = 200; // ensures no more than MAXSTARS stars will be iterated through and drawn
   let theData = findNearestNeighborsFOV(
@@ -169,21 +169,23 @@ const Canvas = (props) => {
   };
 
   const handleTouchStart = (event) => {
-    const touches = event.touches;
-    const rect = canvasRef.current.getBoundingClientRect();
-    if (touches.length === 1) {
-      const touch = touches[0];
+    // Prevent default behavior
+    event.preventDefault();
 
+    const { touches } = event;
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    if (touches.length === 1) {
+      const [touch] = touches;
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
 
       currentMousePosition = [x, y];
       mouseDownPositionDecRa = [x, y, Dec, Ra];
-      //set current mouse position with touch event data
       clickActive = true;
     } else if (touches.length === 2) {
-      const touch1 = touches[0];
-      const touch2 = touches[1];
+      const [touch1, touch2] = touches;
       const x1 = touch1.clientX - rect.left;
       const y1 = touch1.clientY - rect.top;
       const x2 = touch2.clientX - rect.left;
@@ -203,29 +205,42 @@ const Canvas = (props) => {
   };
 
   const handleTouchMove = (event) => {
+    // Prevent default behavior
+    event.preventDefault();
+
     // Get the touch points
     if (expectingDataUpdate && Date.now() > fovAdjustTime + fovHysteresis) {
       return;
     }
-    const touches = event.touches;
-    const rect = canvasRef.current.getBoundingClientRect();
+
+    const { touches } = event;
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
     if (touches.length === 1) {
-      const touch = touches[0];
-      let [x, y] = [touch.clientX - rect.left, touch.clientY - rect.top];
+      const [touch] = touches;
+      const [x, y] = [touch.clientX - rect.left, touch.clientY - rect.top];
       currentMousePosition = [x, y];
     } else if (touches.length === 2) {
-      let [touch1, touch2] = touches;
-      let [x1, y1] = [touch1.clientX - rect.left, touch1.clientY - rect.top];
-      let [x2, y2] = [touch2.clientX - rect.left, touch2.clientY - rect.top];
-      let currentLength = distanceMagnitude(x1, y1, x2, y2);
-      let deltaLength = -currentLength + distanceMagnitude(...pinchCoords);
-
+      const [touch1, touch2] = touches;
+      const [x1, y1] = [touch1.clientX - rect.left, touch1.clientY - rect.top];
+      const [x2, y2] = [touch2.clientX - rect.left, touch2.clientY - rect.top];
+      const currentLength = distanceMagnitude(x1, y1, x2, y2);
+      const initialLength = distanceMagnitude(...pinchCoords);
+      const deltaLength = (initialLength - currentLength) / initialLength;
+      console.log(
+        `PC: ${pinchCoords} IL: ${initialLength} CL: ${currentLength} DL: ${deltaLength}`
+      );
+      if (initialLength === 0) {
+        return;
+      }
+      const ZOOM_FACTOR = 1;
       if (Fov < fovMIN) {
         Fov = fovMIN;
       } else if (Fov > fovMAX) {
         Fov = fovMAX;
       } else {
-        Fov += 0.02 * deltaLength;
+        Fov += deltaLength > 0 ? ZOOM_FACTOR : -ZOOM_FACTOR;
       }
 
       RadiusCoFactor = newCoFactor(Fov); // changing RadiusCoFactor is not a react state change and does not trigger re-render
