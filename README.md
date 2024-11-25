@@ -6,4 +6,9 @@ https://whitelightninggun.github.io/ThousandStars/
 
 ![Screenshot of the Thousand Stars in action](https://github.com/whitelightninggun/ThousandStars/blob/main/thousandstars.PNG)
 
-To-do: Add planets, nebulas, and the ability to rotate the star map to reflect locations on Earth
+To-do:
+
+1. Add planets
+2. nebulas
+3. The ability to rotate the star map to reflect locations on Earth
+4. Some kind of abstraction layer holding the html events (mouse clicks, touches) and retaining state across canvas re-renders (highest priority)
