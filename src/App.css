@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+/* Prevent zooming */
+html,
+body {
+  touch-action: manipulation;
+  -ms-touch-action: manipulation;
+  overflow: hidden;
+}

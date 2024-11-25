@@ -61,7 +61,7 @@ const Canvas = (props) => {
   let pinchCoords = [0, 0, 0, 0];
   let RadiusCoFactor = radiusCofactor; //scales the orthographic calculation results to fit neatly to the current screen proportions
   expectingDataUpdate = false; // back to false upon reinitialisation
-  let fovHysteresis = 60; // units are ms, prevents race conditions between quick zoom changes and data update
+  let fovHysteresis = 100; // units are ms, prevents race conditions between quick zoom changes and data update
   let bgColour = "#020710"; // dark blue
   const MAXSTARS = 200; // ensures no more than MAXSTARS stars will be iterated through and drawn
   let theData = findNearestNeighborsFOV(
@@ -221,26 +221,34 @@ const Canvas = (props) => {
       const [touch] = touches;
       const [x, y] = [touch.clientX - rect.left, touch.clientY - rect.top];
       currentMousePosition = [x, y];
-    } else if (touches.length === 2) {
+    } else if (touches.length > 1) {
       const [touch1, touch2] = touches;
       const [x1, y1] = [touch1.clientX - rect.left, touch1.clientY - rect.top];
       const [x2, y2] = [touch2.clientX - rect.left, touch2.clientY - rect.top];
       const currentLength = distanceMagnitude(x1, y1, x2, y2);
       const initialLength = distanceMagnitude(...pinchCoords);
       const deltaLength = (initialLength - currentLength) / initialLength;
-      console.log(
-        `PC: ${pinchCoords} IL: ${initialLength} CL: ${currentLength} DL: ${deltaLength}`
-      );
-      if (initialLength === 0) {
+
+      if (initialLength === 0 || deltaLength === "-Infinity") {
+        GeneralUpdate(
+          Fov,
+          Dec,
+          Ra,
+          RadiusCoFactor,
+          window.innerWidth / 2,
+          window.innerHeight / 2
+        );
+
         return;
       }
       const ZOOM_FACTOR = 1;
+      Fov += deltaLength > 0 ? ZOOM_FACTOR : -ZOOM_FACTOR;
       if (Fov < fovMIN) {
         Fov = fovMIN;
+        return;
       } else if (Fov > fovMAX) {
         Fov = fovMAX;
-      } else {
-        Fov += deltaLength > 0 ? ZOOM_FACTOR : -ZOOM_FACTOR;
+        return;
       }
 
       RadiusCoFactor = newCoFactor(Fov); // changing RadiusCoFactor is not a react state change and does not trigger re-render

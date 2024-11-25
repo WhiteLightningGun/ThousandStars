@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ViewportMeta from "./ViewportMeta";
 import Canvas from "./Canvas";
 import Controls from "./Components/Controls";
 import Modal from "./Components/Modal";
@@ -159,6 +160,7 @@ function App() {
 
   return (
     <>
+      <ViewportMeta />
       <Canvas
         width={dimensions.width}
         height={dimensions.height}
