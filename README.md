@@ -22,7 +22,7 @@ The Five Thousand Stars project visualizes the brightest stars in the night sky 
 
 ## Demo
 
-[Live Demo](https://whitelightninggun.github.io/ThousandStars/)
+https://whitelightninggun.github.io/ThousandStars/
 
 ## To-do
 
