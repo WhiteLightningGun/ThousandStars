@@ -11,4 +11,19 @@ To-do:
 1. Add planets
 2. nebulas
 3. The ability to rotate the star map to reflect locations on Earth
-4. Some kind of abstraction layer holding the html events (mouse clicks, touches) and retaining state across canvas re-renders (highest priority)
+
+Discussion of to-do points
+
+1. What do we need to render a planet? We need:
+
+a. right ascension
+b. declination
+c1. a radius (assuming we will render the planet as a sphere and not an image)
+c2. a colour
+d. a name
+
+Therefore a planet object could take the form:
+
+{ra: ra, dec: dec, radius: radius, colour: #FF8080, name: "jupiter"}
+or
+[ra, dec, radius, colour, name]

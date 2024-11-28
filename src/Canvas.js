@@ -13,7 +13,9 @@ import MaxMagnitudeForFOV from "./Tools/max_magnitude_for_fov";
 import Constellation_Opacity from "./Tools/constellation_opacity";
 import Text_Opacity from "./Tools/text_opacity";
 import { MobileContext } from "./MobileContext";
+import { PlanetaryContext } from "./PlanetaryContext";
 import { findNearestNeighborsFOV } from "./Data/Abriged_TreeData";
+import DrawPlanets from "./Tools/draw_planets";
 
 let fovAdjustTime;
 let expectingDataUpdate = false;
@@ -49,6 +51,7 @@ const Canvas = (props) => {
     ...rest
   } = props;
   const isMobile = useContext(MobileContext);
+  const planetsDataRef = useContext(PlanetaryContext);
   let Fov = fov;
   const fovMAX = 180;
   const fovMIN = 20;
@@ -131,6 +134,18 @@ const Canvas = (props) => {
     DrawStars(
       canvasRef,
       theData,
+      radius,
+      RadiusCoFactor,
+      window.innerWidth,
+      window.innerHeight,
+      Fov,
+      Dec,
+      Ra,
+      Text_Opacity(labelsVisible, labelsVisibleTime, 500)
+    );
+    DrawPlanets(
+      canvasRef,
+      planetsDataRef.current,
       radius,
       RadiusCoFactor,
       window.innerWidth,
