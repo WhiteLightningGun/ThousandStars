@@ -78,9 +78,7 @@ function DrawPlanets(
   }
 }
 
-function drawPlanet(ctx, coords, windowWidth, windowHeight, magnitude, color) {
-  let mag = magnitude;
-
+function drawPlanet(ctx, coords, windowWidth, windowHeight, radius, color) {
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
   ctx.beginPath();
@@ -88,7 +86,7 @@ function drawPlanet(ctx, coords, windowWidth, windowHeight, magnitude, color) {
   ctx.arc(
     coords[0] + 0.5 * windowWidth,
     coords[1] + 0.5 * windowHeight,
-    mag,
+    radius,
     0,
     2 * Math.PI
   );

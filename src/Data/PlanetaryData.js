@@ -33,7 +33,7 @@ export function GetPlanetaryPositions(currentDate) {
   const uranusPosition = elliptic.position(uranus, earth, currentJDE);
   const neptunePosition = elliptic.position(neptune, earth, currentJDE);
 
-  // [ra, dec, radius, colour, name]
+  // [ra, dec, radius, colour, name], // [ra, dec, radius, colour, name, average angular size in radians] for jupiter
   return [
     [mercuryPosition.ra, mercuryPosition.dec, 3, "#87ecf9", "Mercury"],
     [venusPosition.ra, venusPosition.dec, 5, "#f5e042", "Venus"],
