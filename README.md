@@ -1,12 +1,13 @@
+![Screenshot of the Thousand Stars in action](https://github.com/whitelightninggun/ThousandStars/blob/main/fivethousandstars.PNG)
+
 # The Five Thousand Stars
 
-The first five thousand brightest stars in the entire night sky in a nice 3D viewer, down to magnitude 5.99. Made with React, with some nice CSS animations here and there.
+The first five thousand brightest stars in the entire night sky in a nice 3D viewer, down to magnitude 5.99. Made with React, with some nice CSS animations here and there. Fully cross compatible with all major browsers and phone users.
 
 ## Table of Contents
 
 - [Description](#description)
 - [Demo](#demo)
-- [Screenshots](#screenshots)
 - [To-do](#to-do)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -23,16 +24,13 @@ The Five Thousand Stars project visualizes the brightest stars in the night sky 
 
 [Live Demo](https://whitelightninggun.github.io/ThousandStars/)
 
-## Screenshots
-
-![Screenshot of the Thousand Stars in action](https://github.com/whitelightninggun/ThousandStars/blob/main/fivethousandstars.PNG)
-
 ## To-do
 
 1. Nebulas
 2. The ability to rotate the star map to reflect locations on Earth
 3. Clicking on planets will bring up an information modal about that planet
 4. Night vision mode - make everything shades of red and black
+5. A complete set of constellations, not just the zodiacal ones.
 
 ## Installation
 
