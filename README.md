@@ -1,29 +1,49 @@
-The Thousand Stars.
+# The Five Thousand Stars
 
-The first five thousands brightest stars in the entire night sky in nice 3d viewer, down to magnitude 5.99. Made with React, with some nice CSS animations here and there.
+The first five thousand brightest stars in the entire night sky in a nice 3D viewer, down to magnitude 5.99. Made with React, with some nice CSS animations here and there.
 
-https://whitelightninggun.github.io/ThousandStars/
+## Table of Contents
 
-![Screenshot of the Thousand Stars in action](https://github.com/whitelightninggun/ThousandStars/blob/main/thousandstars.PNG)
+- [Description](#description)
+- [Demo](#demo)
+- [Screenshots](#screenshots)
+- [To-do](#to-do)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+- [Credits](#credits)
 
-To-do:
+## Description
 
-1. Add planets
-2. nebulas
-3. The ability to rotate the star map to reflect locations on Earth
+The Five Thousand Stars project visualizes the brightest stars in the night sky using a 3D viewer. It is built with React and includes various CSS animations to enhance the user experience.
 
-Discussion of to-do points
+## Demo
 
-1. What do we need to render a planet? We need:
+[Live Demo](https://whitelightninggun.github.io/ThousandStars/)
 
-a. right ascension
-b. declination
-c1. a radius (assuming we will render the planet as a sphere and not an image)
-c2. a colour
-d. a name
+## Screenshots
 
-Therefore a planet object could take the form:
+![Screenshot of the Thousand Stars in action](https://github.com/whitelightninggun/ThousandStars/blob/main/fivethousandstars.PNG)
 
-{ra: ra, dec: dec, radius: radius, colour: #FF8080, name: "jupiter"}
-or
-[ra, dec, radius, colour, name]
+## To-do
+
+1. Nebulas
+2. The ability to rotate the star map to reflect locations on Earth
+3. Clicking on planets will bring up an information modal about that planet
+4. Night vision mode - make everything shades of red and black
+
+## Installation
+
+1. Clone the repository:
+   git clone https://github.com/whitelightninggun/ThousandStars.git
+
+2. Navigate to the project directory:
+   cd ThousandStars
+
+3. Install dependencies:
+   npm install
+
+4. Start the development server:
+   npm start
