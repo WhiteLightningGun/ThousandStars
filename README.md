@@ -52,11 +52,11 @@ https://whitelightninggun.github.io/ThousandStars/
 
 Open the program up on your browser as normal: https://whitelightninggun.github.io/ThousandStars/
 
-**To Change the Direction of View on Desktop:** Click and drag to another part of the screen to change view direction.
-**To Change the Direction of View on Mobile:** Tap and hold and then drag to another part of the screen to change direction.
-**To Bring Up Information on a Star:** Click or tap on the star to bring up a modal window displaying the vital stats.
-**To Zoom In or Out on Desktop:** Use the mouse wheel.
-**To Zoom In or Out on Mobile:** Use the pinch zoom technique.
+**To Change the Direction of View on Desktop:** Click and drag to another part of the screen to change view direction.<br>
+**To Change the Direction of View on Mobile:** Tap and hold and then drag to another part of the screen to change direction.<br>
+**To Bring Up Information on a Star:** Click or tap on the star to bring up a modal window displaying the vital stats.<br>
+**To Zoom In or Out on Desktop:** Use the mouse wheel.<br>
+**To Zoom In or Out on Mobile:** Use the pinch zoom technique.<br>
 
 ## Features
 
