@@ -1,4 +1,4 @@
-import { julian, planetposition, elliptic } from "astronomia";
+import { julian, planetposition, elliptic, solar } from "astronomia";
 import planetData from "astronomia/data";
 
 /**
@@ -32,6 +32,7 @@ export function GetPlanetaryPositions(currentDate) {
   const saturnPosition = elliptic.position(saturn, earth, currentJDE);
   const uranusPosition = elliptic.position(uranus, earth, currentJDE);
   const neptunePosition = elliptic.position(neptune, earth, currentJDE);
+  const solarPosition = solar.apparentEquatorial(currentJDE);
 
   // [ra, dec, radius, colour, name], // [ra, dec, radius, colour, name, average angular size in radians] for jupiter
   return [
@@ -42,5 +43,6 @@ export function GetPlanetaryPositions(currentDate) {
     [saturnPosition.ra, saturnPosition.dec, 8, "#f5d142", "Saturn"],
     [uranusPosition.ra, uranusPosition.dec, 6.5, "#42d4f5", "Uranus"],
     [neptunePosition.ra, neptunePosition.dec, 6.5, "#425df5", "Neptune"],
+    [solarPosition._ra, solarPosition._dec, 12, "#FFFFAA", "Sol"],
   ];
 }

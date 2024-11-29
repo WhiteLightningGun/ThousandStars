@@ -52,8 +52,8 @@ function DrawPlanets(
         ctx.fillStyle = planetColourWithOpacity;
         ctx.fillText(
           planetData[i][4],
-          coords[0] + halfWindowWidth + 14,
-          coords[1] + halfWindowHeight + planetData[i][2] * 0.5
+          coords[0] + halfWindowWidth + planetData[i][2] + 5,
+          coords[1] + halfWindowHeight + planetData[i][2] * 0.5 + 2
         );
         drawPlanet(
           ctx,
