@@ -26,11 +26,12 @@ https://whitelightninggun.github.io/ThousandStars/
 
 ## To-do
 
-1. Nebulas
+1. Deep sky objects, for instance the full collection of Messier objects
 2. The ability to rotate the star map to reflect locations on Earth
-3. Clicking on planets will bring up an information modal about that planet
-4. Night vision mode - make everything shades of red and black
-5. A complete set of constellations, not just the zodiacal ones.
+3. The ability to select your current time, right now planets are limited to current date
+4. Clicking on planets will bring up an information modal about that planet
+5. Night vision mode - make everything shades of red and black
+6. A complete set of constellations, not just the zodiacal ones.
 
 ## Installation
 
