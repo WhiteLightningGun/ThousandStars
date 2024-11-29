@@ -56,6 +56,7 @@ Open the program up on your browser as normal: https://whitelightninggun.github.
 6. A complete set of constellations, not just the zodiacal ones.
 7. Annotations for constellations
 8. Add the sun
+9. Add major satellites of the planets (Ganymede, Io, Europa, etc)
 
 ## License
 
