@@ -8,11 +8,9 @@ The first five thousand brightest stars in the entire night sky in a nice 3D vie
 
 - [Description](#description)
 - [Demo](#demo)
-- [To-do](#to-do)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
+- [To-do](#to-do)
 - [License](#license)
 - [Credits](#credits)
 
@@ -58,11 +56,15 @@ Open the program up on your browser as normal: https://whitelightninggun.github.
 **To Zoom In or Out on Desktop:** Use the mouse wheel.<br>
 **To Zoom In or Out on Mobile:** Use the pinch zoom technique.<br>
 
-## Features
+## To-do
 
-## Contributing
-
-No contributors except myself so far.
+1. Deep sky objects, for instance the full collection of Messier objects
+2. The ability to rotate the star map to reflect locations on Earth
+3. The ability to select your current time, right now planets are limited to current date
+4. Clicking on planets will bring up an information modal about that planet
+5. Night vision mode - make everything shades of red and black
+6. A complete set of constellations, not just the zodiacal ones.
+7. Annotations for constellations
 
 ## License
 
