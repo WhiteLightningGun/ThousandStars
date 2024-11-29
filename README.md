@@ -22,16 +22,6 @@ The Five Thousand Stars project visualizes the brightest stars in the night sky 
 
 https://whitelightninggun.github.io/ThousandStars/
 
-## To-do
-
-1. Deep sky objects, for instance the full collection of Messier objects
-2. The ability to rotate the star map to reflect locations on Earth
-3. The ability to select your current time, right now planets are limited to current date
-4. Clicking on planets will bring up an information modal about that planet
-5. Night vision mode - make everything shades of red and black
-6. A complete set of constellations, not just the zodiacal ones.
-7. Annotations for constellations
-
 ## Installation
 
 1. Clone the repository:
@@ -65,6 +55,7 @@ Open the program up on your browser as normal: https://whitelightninggun.github.
 5. Night vision mode - make everything shades of red and black
 6. A complete set of constellations, not just the zodiacal ones.
 7. Annotations for constellations
+8. Add the sun
 
 ## License
 
