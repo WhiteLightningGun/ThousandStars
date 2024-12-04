@@ -56,10 +56,12 @@ Open the program up on your browser as normal: https://whitelightninggun.github.
 6. A complete set of constellations, not just the zodiacal ones.
 7. Annotations for constellations
 8. Add major satellites of the planets (Ganymede, Io, Europa, etc)
+9. Improve accessibility by implementing several alternative methods for the zoom functionality (currently limited to only mouse wheel and pinch zooming)
+10. Add the moon
 
 ## License
 
-Haven't decided yet.
+This project and it's chief dependency (Astronomia) is published under the MIT license.
 
 ## Credits
 
