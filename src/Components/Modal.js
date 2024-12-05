@@ -106,3 +106,12 @@ function Modal({ active, handleModalClick, message, modalData }) {
 }
 
 export default Modal;
+
+/**
+ * 
+ *       <div className="modal-data">
+        <div className="modal-row-header">
+          <p>{`[${modalData.decRad}, ${modalData.raRad}]`}</p>
+        </div>
+      </div>
+ */
