@@ -1,6 +1,7 @@
 import angularDistanceCheck from "./angular_distance_check";
 import orthographicProjection from "./orthographic_projection";
 import MaxMagnitudeForFOV from "./max_magnitude_for_fov";
+import { GetPlanetImage } from "./planet_images";
 /**
  *
  * @param {*} ref
@@ -61,7 +62,8 @@ function DrawPlanets(
           windowWidth,
           windowHeight,
           planetData[i][2],
-          planetColour
+          planetColour,
+          planetData[i][4]
         );
       } else if (maxMagnitude > planetData[i][2]) {
         //do nothing if star is not bright and has Mag < maxMagnitude
@@ -71,26 +73,62 @@ function DrawPlanets(
           windowWidth,
           windowHeight,
           planetData[i][2],
-          planetColour
+          planetColour,
+          planetData[i][4]
         );
       }
     }
   }
 }
 
-function drawPlanet(ctx, coords, windowWidth, windowHeight, radius, color) {
-  ctx.strokeStyle = color;
-  ctx.fillStyle = color;
-  ctx.beginPath();
-  ctx.lineWidth = 2;
-  ctx.arc(
-    coords[0] + 0.5 * windowWidth,
-    coords[1] + 0.5 * windowHeight,
-    radius,
-    0,
-    2 * Math.PI
-  );
-  ctx.stroke();
-  ctx.fill();
+function drawPlanet(
+  ctx,
+  coords,
+  windowWidth,
+  windowHeight,
+  radius,
+  color,
+  name
+) {
+  const image = GetPlanetImage(name);
+
+  if (image) {
+    // Draw the image if it exists
+    image.onload = () => {
+      ctx.drawImage(
+        image,
+        coords[0] + 0.5 * windowWidth - radius,
+        coords[1] + 0.5 * windowHeight - radius,
+        radius * 2,
+        radius * 2
+      );
+    };
+
+    // If the image is already loaded, draw it immediately
+    if (image.complete) {
+      ctx.drawImage(
+        image,
+        coords[0] + 0.5 * windowWidth - radius,
+        coords[1] + 0.5 * windowHeight - radius,
+        radius * 2,
+        radius * 2
+      );
+    }
+  } else {
+    // Fallback to drawing a circle if the image is not available
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.arc(
+      coords[0] + 0.5 * windowWidth,
+      coords[1] + 0.5 * windowHeight,
+      radius,
+      0,
+      2 * Math.PI
+    );
+    ctx.stroke();
+    ctx.fill();
+  }
 }
 export default DrawPlanets;
