@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ThousandStars/static/css/main.7752db21.css",
-    "main.js": "/ThousandStars/static/js/main.70f6b74b.js",
+    "main.js": "/ThousandStars/static/js/main.d9a2e540.js",
     "static/js/453.89c07995.chunk.js": "/ThousandStars/static/js/453.89c07995.chunk.js",
     "index.html": "/ThousandStars/index.html",
     "main.7752db21.css.map": "/ThousandStars/static/css/main.7752db21.css.map",
-    "main.70f6b74b.js.map": "/ThousandStars/static/js/main.70f6b74b.js.map",
+    "main.d9a2e540.js.map": "/ThousandStars/static/js/main.d9a2e540.js.map",
     "453.89c07995.chunk.js.map": "/ThousandStars/static/js/453.89c07995.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7752db21.css",
-    "static/js/main.70f6b74b.js"
+    "static/js/main.d9a2e540.js"
   ]
 }
