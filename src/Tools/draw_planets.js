@@ -1,7 +1,7 @@
 import angularDistanceCheck from "./angular_distance_check";
 import orthographicProjection from "./orthographic_projection";
 import MaxMagnitudeForFOV from "./max_magnitude_for_fov";
-import { GetPlanetImage } from "./planet_images";
+//import { GetPlanetImage } from "./planet_images";
 /**
  *
  * @param {*} ref
@@ -90,7 +90,7 @@ function drawPlanet(
   color,
   name
 ) {
-  const image = GetPlanetImage(name);
+  const image = false; //GetPlanetImage(name); omitting planet images for now
 
   if (image) {
     // Draw the image if it exists

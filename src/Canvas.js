@@ -16,6 +16,8 @@ import { MobileContext } from "./MobileContext";
 import { PlanetaryContext } from "./PlanetaryContext";
 import { findNearestNeighborsFOV } from "./Data/Abriged_TreeData";
 import DrawPlanets from "./Tools/draw_planets";
+import DrawMoon from "./Tools/draw_moon";
+import { LunarContext } from "./LunarContext";
 
 let fovAdjustTime;
 let expectingDataUpdate = false;
@@ -52,6 +54,7 @@ const Canvas = (props) => {
   } = props;
   const isMobile = useContext(MobileContext);
   const planetsDataRef = useContext(PlanetaryContext);
+  const lunarDataRef = useContext(LunarContext);
   let Fov = fov;
   const fovMAX = 180;
   const fovMIN = 20;
@@ -146,6 +149,18 @@ const Canvas = (props) => {
     DrawPlanets(
       canvasRef,
       planetsDataRef.current,
+      radius,
+      RadiusCoFactor,
+      window.innerWidth,
+      window.innerHeight,
+      Fov,
+      Dec,
+      Ra,
+      Text_Opacity(labelsVisible, labelsVisibleTime, 500)
+    );
+    DrawMoon(
+      canvasRef,
+      lunarDataRef.current,
       radius,
       RadiusCoFactor,
       window.innerWidth,

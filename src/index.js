@@ -5,13 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MobileProvider } from "./MobileContext";
 import { PlanetsProvider } from "./PlanetaryContext";
+import { LunarProvider } from "./LunarContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <MobileProvider>
       <PlanetsProvider>
-        <App />
+        <LunarProvider>
+          <App />
+        </LunarProvider>
       </PlanetsProvider>
     </MobileProvider>
   </React.StrictMode>

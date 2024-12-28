@@ -1,12 +1,5 @@
-import {
-  julian,
-  planetposition,
-  elliptic,
-  solar,
-  moonposition,
-} from "astronomia";
+import { julian, planetposition, elliptic, solar } from "astronomia";
 import planetData from "astronomia/data";
-import geocentricToEquatorial from "../Tools/geocentric_to_equatorial";
 
 /**
  * Computes the current positions of the planets at this moment in time using the Astronomia library
@@ -40,12 +33,6 @@ export function GetPlanetaryPositions(currentDate) {
   const uranusPosition = elliptic.position(uranus, earth, currentJDE);
   const neptunePosition = elliptic.position(neptune, earth, currentJDE);
   const solarPosition = solar.apparentEquatorial(currentJDE);
-  const moon = moonposition.position(currentJDE);
-  const moonPositionEquatorial = geocentricToEquatorial(
-    moon._ra,
-    moon._dec,
-    23.43604
-  );
 
   // [ra, dec, radius, colour, name], // [ra, dec, radius, colour, name, average angular size in radians] for jupiter
   return [
@@ -57,12 +44,5 @@ export function GetPlanetaryPositions(currentDate) {
     [uranusPosition.ra, uranusPosition.dec, 6.5, "#42d4f5", "Uranus"],
     [neptunePosition.ra, neptunePosition.dec, 6.5, "#425df5", "Neptune"],
     [solarPosition._ra, solarPosition._dec, 12, "#FFFFAA", "Sol"],
-    [
-      moonPositionEquatorial.ra,
-      moonPositionEquatorial.dec,
-      12,
-      "#EEFFEE",
-      "Moon",
-    ],
   ];
 }
